@@ -11,8 +11,6 @@ public class RectArea {
 	public Point leftL, leftU, rightL, rightU;
 	// Массив соседних зон
 	public ArrayList<RectArea> connected;
-	// Проходы в соседние зоны
-	public ArrayList<int[]> pass;
 
 //	public RectArea(Point[] points) {
 //		if (points.length == 4) {
@@ -28,7 +26,6 @@ public class RectArea {
 		this.leftU = new Point(x1, y1);
 		this.rightL = new Point(x2, y2);
 		this.rightU = new Point(x3, y3);
-		this.pass = new ArrayList<int[]>();
 		this.connected = new ArrayList<RectArea>();
 	}
 
@@ -46,33 +43,13 @@ public class RectArea {
 		return this;
 	};
 
-	public boolean isImpassable(int x, int y, int objectWidth) {
+	public boolean isImpassable(int x, int y) {
 		// Проверяем, пересекает ли данный маршрут зоны
-		if ((x > this.rightU.x || x < this.leftU.x) || y < this.rightU.y || y > this.rightL.y) {
+		if ((x  > this.rightU.x || x < this.leftU.x) || y < this.rightU.y || y > this.rightL.y) {
 			boolean canPass = false;
-			// Проверяем, существует ли проход
-			if(this.pass != null) {
-				for (int i = 0; i < this.pass.size(); i++) {
-					int x0 = this.pass.get(i)[0];
-					int y0 = this.pass.get(i)[1];
-					int x1 = this.pass.get(i)[2];
-					int y1 = this.pass.get(i)[3];
-					if(y1 > y0)
-						y1 -= (int)(objectWidth);
-					else
-						y0 -= (int)(objectWidth);
-					// Проход по вертикали
-					if ((x0 < x && x1 > x) || (x1 < x && x0 > x)) {
-						canPass = true;
-						break;
-					}
-					// Проход по горизонтали
-					if ((y0 < y && y1 > y) || (y1 < y && y0 > y)) {
-						canPass = true;
-						break;
-					}
-				}
-			}
+			// Переход на соединенную зону
+			if(this.getConnected(x, y) != this)
+				canPass = true;
 			if (!canPass) {
 				return false;
 			}
@@ -93,13 +70,5 @@ public class RectArea {
 		g.setColor(Color.white);
 		g.drawRect(this.leftL.x + additionX, this.leftU.y + additionY, this.width(), this.height());
 		g.setColor(Color.red);
-		if(this.pass != null) {
-			for(int i = 0; i < this.pass.size(); i++) {
-				g.drawLine(this.pass.get(i)[0] + additionX, 
-						this.pass.get(i)[1] + additionY,
-						this.pass.get(i)[2] + additionX, 
-						this.pass.get(i)[3] + additionY);
-			}
-		}
 	}
 }

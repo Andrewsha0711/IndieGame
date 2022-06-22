@@ -64,41 +64,41 @@ public class MovingObject {
 		this.checkArea();
 		if(this.direction.left) {
 			if(distance > 0) {
-				if(this.area.isImpassable(this.x - distance, this.y, this.width))
+				if(this.area.isImpassable(this.x - distance, this.y))
 					this.x -= distance;
 			}
 			if(distance < 0) {
-				if(this.area.isImpassable(this.x + this.thickness + distance, this.y, this.width))
+				if(this.area.isImpassable(this.x + this.thickness + distance, this.y))
 				this.x += distance;
 			}
 		}
 		if(this.direction.right) {
 			if(distance > 0) {
-				if(this.area.isImpassable(this.x + this.thickness + distance, this.y, this.width))
+				if(this.area.isImpassable(this.x + this.thickness + distance, this.y))
 				this.x += distance;
 			}
 			if(distance < 0) {
-				if(this.area.isImpassable(this.x - distance, this.y, this.width))
+				if(this.area.isImpassable(this.x - distance, this.y))
 				this.x -= distance;
 			}
 		}
 		if(this.direction.up) {
 			if(distance > 0) {
-				if(this.area.isImpassable(this.x, this.y - distance, this.width))
+				if(this.area.isImpassable(this.x, this.y - distance))
 				this.y -= distance;
 			}
 			if(distance < 0) {
-				if(this.area.isImpassable(this.x, this.y + this.thickness + distance, this.width))
+				if(this.area.isImpassable(this.x, this.y + this.thickness + distance))
 				this.y += distance;
 			}
 		}
 		if(this.direction.down) {
 			if(distance > 0) {
-				if(this.area.isImpassable(this.x, this.y + this.thickness + distance, this.width))
+				if(this.area.isImpassable(this.x, this.y + this.thickness + distance))
 				this.y += distance;
 			}
 			if(distance < 0) {
-				if(this.area.isImpassable(this.x, this.y - distance, this.width))
+				if(this.area.isImpassable(this.x, this.y - distance))
 				this.y -= distance;
 			}
 		}

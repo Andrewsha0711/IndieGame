@@ -11,7 +11,7 @@ import player.skins.DefaultPlayerSkin;
 // TODO: singleton
 public class Player extends MovingObject{
 	private static Player instance;
-	private static Animated skin;
+	private static DefaultPlayerSkin skin;
 	// Дефолтные координаты
 	private static int defaultX = 0;
 	private static int defaultY = 0;

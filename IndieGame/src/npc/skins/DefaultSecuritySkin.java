@@ -1,4 +1,4 @@
-package player.skins;
+package npc.skins;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,27 +8,20 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JComponent;
 
 import engine.Direction;
 
-public class DefaultPlayerSkin extends JComponent{
-//	private static final String standing  = "resources/skins/default/standing.png";
-//	private static final String walkingLeft  = "resources/skins/default/walking_left.png";
-//	private static final String walkingRight  = "resources/skins/default/walking_right.png";
-	
+public class DefaultSecuritySkin {	
 	private static Image[] standing = new Image[4];
 	private static Image[] walkingLeft = new Image[4];
 	private static Image[] walkingRight = new Image[4];
 	
-	// animation speed coefficient and counter
 	private static int k = 20, i = k;
 	private static boolean isWalkingLeftLeg = true;
 	
-	//default direction
 	private static int standingFlag = 3;
 	
-	public DefaultPlayerSkin(){
+	public DefaultSecuritySkin(){
 		BufferedImage buffimage;
 		try {
 			buffimage = ImageIO.read(new File("resources/skins/default/standing_l.png"));
@@ -101,17 +94,15 @@ public class DefaultPlayerSkin extends JComponent{
 		}
 	}
 	
-	public void paint(Graphics g, Direction direction) {
+	public void paint(Graphics g, Direction direction, int x, int y) {
 		Image image;
 		if(!direction.left && !direction.right && !direction.up && !direction.down) {
 			image = standing();
-//			System.out.println(Player.getInstance().getX());
-//			System.out.println(Player.getInstance().getY());
 		}
 		else {
 			image = walking(direction);
 		}
 		g = (Graphics2D) g;
-		g.drawImage(image, 640, 360, null);
+		g.drawImage(image, x, y, null);
 	}
 }

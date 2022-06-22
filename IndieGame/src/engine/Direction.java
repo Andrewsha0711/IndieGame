@@ -35,4 +35,11 @@ public class Direction {
 		if(value)
 		this.up = !value;
 	}
+	
+	public void setStanding() {
+		this.down = false;
+		this.left = false;
+		this.right = false;
+		this.up = false;
+	}
 }

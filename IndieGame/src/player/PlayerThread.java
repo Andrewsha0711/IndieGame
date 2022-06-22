@@ -19,8 +19,8 @@ public class PlayerThread extends Thread {
 		while (isRunning) {
 			try {
 				Player.getInstance().move();
-				sleep(10);
 				GameWindow.getInstance().repaint();
+				Thread.currentThread().sleep(15);
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
 			}

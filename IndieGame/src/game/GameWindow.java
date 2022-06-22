@@ -3,11 +3,12 @@ package game;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
 import maps.HotlineMiamiMap;
-import player.CustomKeyListener;
+import npc.SecurityGuardThread;
 import player.Player;
 import player.PlayerThread;
 
@@ -19,6 +20,7 @@ public class GameWindow extends JComponent{
 				
 	    // TODO: any map not only this one
 	    private HotlineMiamiMap map;
+	    private ArrayList<SecurityGuardThread> npcThreads;
 
         public Dimension getPreferredSize() {
 	        return new Dimension(DEF_WIDTH, DEF_HEIGHT);
@@ -27,7 +29,14 @@ public class GameWindow extends JComponent{
 	    // TODO: change to constuct from any map
 		private GameWindow(HotlineMiamiMap map){	
 			this.map = map;
+			this.npcThreads = new ArrayList<SecurityGuardThread>();
+			for(int i = 0; i < this.map.npc.size(); i++) {
+				this.npcThreads.add(new SecurityGuardThread(this.map.npc.get(i)));
+			}
 			PlayerThread.getInstance().start();
+			for(int i = 0; i < this.npcThreads.size(); i++) {
+				this.npcThreads.get(i).start();
+			}
 		}
 		
 		public static GameWindow getInstance() {
@@ -47,6 +56,9 @@ public class GameWindow extends JComponent{
 
 		public void interruptAll() {
 			PlayerThread.isRunning = false;
+			for(int i = 0; i < this.npcThreads.size(); i++) {
+				this.npcThreads.get(i).isRunning = false;
+			}
 //			PlayerThread.getInstance().interrupt();
 		}
 }
