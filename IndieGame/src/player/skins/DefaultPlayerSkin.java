@@ -12,6 +12,7 @@ import javax.swing.JComponent;
 
 import engine.Direction;
 import player.Animated;
+import player.Player;
 
 public class DefaultPlayerSkin extends JComponent implements Animated{
 //	private static final String standing  = "resources/skins/default/standing.png";
@@ -106,6 +107,8 @@ public class DefaultPlayerSkin extends JComponent implements Animated{
 		Image image;
 		if(!direction.left && !direction.right && !direction.up && !direction.down) {
 			image = standing();
+//			System.out.println(Player.getInstance().getX());
+//			System.out.println(Player.getInstance().getY());
 		}
 		else {
 			image = walking(direction);

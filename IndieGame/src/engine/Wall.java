@@ -6,10 +6,6 @@ public class Wall {
 	private Point[] points;
 	private static int size = 3;
 	
-	public Wall(Point a, Point b, Point c, Point d) {
-		
-	}
-	
 	public Wall(Point a, Point b, int size) {
 		this.points = new Point[2];
 		this.points[0] = a;

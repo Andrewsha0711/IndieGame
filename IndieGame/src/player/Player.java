@@ -2,10 +2,10 @@ package player;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 
 import engine.Direction;
 import engine.MovingObject;
+import maps.HotlineMiamiMap;
 import player.skins.DefaultPlayerSkin;
 
 // TODO: singleton
@@ -18,8 +18,10 @@ public class Player extends MovingObject{
 	private static int defaultStep = 2;
 	
 	private Player() {
-		super(defaultX, defaultY);
+		// TODO: hardcode
+		super(defaultX, defaultY, 53 ,53);
 		skin = new DefaultPlayerSkin();
+		this.setArea(HotlineMiamiMap.getDefaultArea());
 	}
 	
 	public static Player getInstance() {
