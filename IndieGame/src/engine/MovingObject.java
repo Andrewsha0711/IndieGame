@@ -10,16 +10,17 @@ public class MovingObject {
 	private boolean isWalking;
 	
 	//Размер модельки
-	public int width = 0;
-	public int thickness = 0;
+	private int width;
+	private int thickness;
 	
-	public MovingObject(int x, int y) {
+	public MovingObject(int x, int y, int width, int height) {
 		super();
 		this.x = x;
 		this.y = y;
+		this.width = width;
+		this.thickness = height;
 		this.direction = new Direction();
 	}
-	
 	
 	public void setArea(RectArea area) {
 		this.area = area;
@@ -58,44 +59,52 @@ public class MovingObject {
 		return this.direction;
 	}
 	
-	public void checkArea(int width, int height) {
-		if(!(this.x > this.area.leftL.x && this.x + width < this.area.rightL.x) ||
-				!(this.y > this.area.leftU.y && this.y + height < this.area.rightL.y)) {
-			this.area = this.area.getConnected(this.x, this.y, width, height);
+	public void checkArea() {
+		if(!(this.x > this.area.leftL.x && this.x+this.thickness < this.area.rightL.x)) {
+			this.area = this.area.getConnected(this.x, this.y);
 		}
 	}
 	
 	public boolean move(int distance) {
+		this.checkArea();
 		if(this.direction.left) {
 			if(distance > 0) {
-				if(this.area.isImpassable(this.x - distance, this.y, this.thickness, this.width)) {
+				if(this.area.isImpassable(this.x - distance, this.y))
 					this.x -= distance;
-					this.checkArea(this.thickness, this.width);
-				}
+			}
+			if(distance < 0) {
+				if(this.area.isImpassable(this.x + this.thickness + distance, this.y))
+					this.x += distance;
 			}
 		}
 		if(this.direction.right) {
 			if(distance > 0) {
-				if(this.area.isImpassable(this.x + distance, this.y, this.thickness, this.width)) {
-					this.x += distance;	
-					this.checkArea(this.thickness, this.width);
-				}
+				if(this.area.isImpassable(this.x + this.thickness + distance, this.y))
+					this.x += distance;
+			}
+			if(distance < 0) {
+				if(this.area.isImpassable(this.x - distance, this.y))
+					this.x -= distance;
 			}
 		}
 		if(this.direction.up) {
 			if(distance > 0) {
-				if(this.area.isImpassable(this.x, this.y - distance, this.width, this.thickness)) {
+				if(this.area.isImpassable(this.x, this.y - distance))
 					this.y -= distance;
-					this.checkArea(this.width, this.thickness);
-				}
+			}
+			if(distance < 0) {
+				if(this.area.isImpassable(this.x, this.y + this.thickness + distance))
+					this.y += distance;
 			}
 		}
 		if(this.direction.down) {
 			if(distance > 0) {
-				if(this.area.isImpassable(this.x, this.y + distance, this.width, this.thickness)) {
-					this.y += distance;
-					this.checkArea(this.width, this.thickness);
-				}
+				if(this.area.isImpassable(this.x, this.y + this.thickness + distance))
+					this.y += distance; 
+			}
+			if(distance < 0) {
+				if(this.area.isImpassable(this.x, this.y - distance))
+					this.y -= distance;
 			}
 		}
 		

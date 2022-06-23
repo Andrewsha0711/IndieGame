@@ -33,11 +33,12 @@ public class RectArea {
 		this.loot = new ArrayList<Loot>();
 	}
 
-	public RectArea getConnected(int x, int y, int width, int height) {
+	public RectArea getConnected(int x, int y) {
 		if(this.connected != null) {
 			for (int i = 0; i < this.connected.size(); i++) {
-				if (this.connected.get(i).leftL.x < x && this.connected.get(i).rightL.x > x + width) {
-					if (this.connected.get(i).leftL.y > y + height && this.connected.get(i).leftU.y < y)  {
+				if (this.connected.get(i).leftL.x < x && this.connected.get(i).rightL.x > x) {
+					if ((this.connected.get(i).leftL.y > y && this.connected.get(i).leftU.y < y)
+							|| (this.connected.get(i).leftL.y < y && this.connected.get(i).leftU.y > y))  {
 						return this.connected.get(i);
 					}
 				}
@@ -45,38 +46,28 @@ public class RectArea {
 		}
 		return this;
 	};
-
-	public boolean isImpassable(int x, int y, int width, int height) {
-		// Проверяем, пересекает ли данный маршрут зоны
-		if ((x + width >= this.rightU.x || x < this.leftU.x) || (y < this.rightU.y || y + height > this.rightL.y)) {
-			// Переход на соединенную зону
-//			if(direction.right) {
-//				return this.getConnected(x + width, y, x + width, y + height);
-//			}
-//			if(direction.left) {
-//				return this.getConnected(x, y, x, y + height);
-//			}
-//			if(direction.down) {
-//				return this.getConnected(x, y + height, x + width, y + height);
-//			}
-//			if(direction.down) {
-//				return this.getConnected(x, y, x + width, y);
-//			}
-			if(this.getConnected(x, y, width, height) != this) {
-				return true;
-			}
-			return false;
-		}
-		return true;
-	}
 	
 	public Loot checkLoot(int x, int y) {
 		for (int i = 0; i<loot.size();i++) {
-			if (Math.abs(loot.get(i).position.x-x)<30) return loot.get(i);
+			if (Math.abs(loot.get(i).position.x-x)<40 && Math.abs(loot.get(i).position.y-y)<40) return loot.get(i);
 		}
 		return null;
 	}
-	
+
+	public boolean isImpassable(int x, int y) {
+		// Проверяем, пересекает ли данный маршрут зоны
+		if ((x  > this.rightU.x || x < this.leftU.x) || y < this.rightU.y || y > this.rightL.y) {
+			boolean canPass = false;
+			// Переход на соединенную зону
+			if(this.getConnected(x, y) != this)
+				canPass = true;
+			if (!canPass) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public int width() {
 		return (int) (Math.abs(this.leftL.x - this.rightL.x));
 	}

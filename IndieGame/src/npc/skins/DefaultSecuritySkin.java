@@ -17,13 +17,10 @@ public class DefaultSecuritySkin {
 	private static Image[] walkingLeft = new Image[4];
 	private static Image[] walkingRight = new Image[4];
 	
-	private static int k = 20, i = k;
-	private static boolean isWalkingLeftLeg = true;
+	private int k = 20, i = k;
+	private boolean isWalkingLeftLeg = true;
 	
 	private static int standingFlag = 3;
-	
-	private static int thickness = 0;
-	private static int width = 0;
 	
 	public DefaultSecuritySkin(){
 		BufferedImage buffimage;
@@ -63,14 +60,10 @@ public class DefaultSecuritySkin {
 	}
 	
 	public Image standing() {
-	    thickness = 31;
-	    width = 53;
 		return standing[standingFlag];
 	}
 	
-	public static Image walking(Direction direction) {
-	    thickness = 53;
-	    width = 53;
+	public Image walking(Direction direction) {
 		int j = -1;
 		if(direction.left) { j = 0; }
 		if(direction.right) { j = 1; }
@@ -100,13 +93,6 @@ public class DefaultSecuritySkin {
 				return walkingLeft[j];
 			}
 		}
-	}
-	
-	public int getCurrentThickness() {
-		return thickness;
-	}
-	public int getCurrentWidth() {
-		return width;
 	}
 	
 	public void paint(Graphics g, Direction direction, int x, int y) {

@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 
 import engine.Direction;
 import engine.MovingObject;
-import maps.HotlineMiamiMap;
+import engine.RectArea;
 import npc.skins.DefaultSecuritySkin;
 import player.Player;
 import npc.SecurityGuardThread;
@@ -18,18 +18,16 @@ public class SecurityGuard extends MovingObject{
 	private int defaultStep = 2;
 	private int visibility = 150;
 	
-	public SecurityGuard(int x, int y) {
+	public SecurityGuard(int x, int y, RectArea area) {
 		// TODO: hardcode
-		super(x, y);
+		super(x, y, 53 ,53);
 		skin = new DefaultSecuritySkin();
-		this.setArea(HotlineMiamiMap.getDefaultArea(this.getX(), this.getY()));
+		this.setArea(area);
 	}
 	
 	public void paint(Graphics g, int additionX, int additionY) {
 		g = (Graphics2D) g;
 		skin.paint(g, this.direction, this.getX() + additionX, this.getY() + additionY);
-		this.thickness = 53;
-		this.thickness = 53;
 	}
 	
 //	public void move(Direction direction) {

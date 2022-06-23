@@ -28,9 +28,6 @@ public class DefaultPlayerSkin extends JComponent{
 	//default direction
 	private static int standingFlag = 3;
 	
-	private static int thickness = 0;
-	private static int width = 0;
-	
 	public DefaultPlayerSkin(){
 		BufferedImage buffimage;
 		try {
@@ -69,15 +66,11 @@ public class DefaultPlayerSkin extends JComponent{
 	}
 	
 	public Image standing() {
-	    thickness = 31;
-	    width = 53;
 		return standing[standingFlag];
 	}
 	
 	public static Image walking(Direction direction) {
 		int j = -1;
-		thickness = 53;
-		width = 53;
 		if(direction.left) { j = 0; }
 		if(direction.right) { j = 1; }
 		if(direction.down) { j = 2; }
@@ -108,34 +101,17 @@ public class DefaultPlayerSkin extends JComponent{
 		}
 	}
 	
-	public int getCurrentThickness() {
-		return thickness;
-	}
-	public int getCurrentWidth() {
-		return width;
-	}
-	
 	public void paint(Graphics g, Direction direction) {
 		Image image;
-		g = (Graphics2D) g;
 		if(!direction.left && !direction.right && !direction.up && !direction.down) {
 			image = standing();
-			if(standingFlag == 0) {
-				g.drawImage(image, 640 + 11, 360, null);
-			}
-			if(standingFlag == 1) {
-				g.drawImage(image, 640 + 11, 360, null);
-			}
-			if(standingFlag == 2) {
-				g.drawImage(image, 640, 360 + 11, null);
-			}
-			if(standingFlag == 3) {
-				g.drawImage(image, 640, 360 + 11, null);
-			}
+//			System.out.println(Player.getInstance().getX());
+//			System.out.println(Player.getInstance().getY());
 		}
 		else {
 			image = walking(direction);
-			g.drawImage(image, 640, 360, null);
 		}
+		g = (Graphics2D) g;
+		g.drawImage(image, 640, 360, null);
 	}
 }
