@@ -1,10 +1,11 @@
 package game;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-
+import java.awt.Color;
 import javax.swing.JComponent;
 
 import maps.HotlineMiamiMap;
@@ -49,9 +50,14 @@ public class GameWindow extends JComponent{
 		//TODO: getInstance(<AnyMap> map)
 		
 		public void paint(Graphics g) {
-			g = (Graphics2D) g;
-			this.map.paint(g);
-			Player.getInstance().paint(g);
+			Graphics2D g2 = (Graphics2D) g;
+			this.map.paint(g2);
+			g2.setColor(Color.magenta);
+			g2.fillRect(1100,20, 150, 50);
+			g2.setColor(Color.yellow);
+			g2.setFont(new Font(g2.getFont().getFontName(), Font.BOLD, 20));
+			g2.drawString("Loot score: "+Player.getInstance().getLootCount(), 1110,50);
+			Player.getInstance().paint(g2);
 		}
 
 		public void interruptAll() {

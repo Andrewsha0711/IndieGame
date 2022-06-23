@@ -20,6 +20,9 @@ public class CustomKeyListener implements KeyListener{
 		if (e.getKeyCode()==KeyEvent.VK_S) {
 			Player.getInstance().direction.setDown(true);
 		}
+		if (e.getKeyCode()==KeyEvent.VK_E) {
+			Player.getInstance().checkLoot();
+		}
 //		System.out.println(Player.getInstance().getDirection());
 	}
 

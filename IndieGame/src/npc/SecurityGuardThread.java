@@ -6,7 +6,7 @@ import engine.Direction;
 import game.GameWindow;
 
 public class SecurityGuardThread extends Thread{
-	public boolean isRunning = false;
+	public static boolean isRunning = false;
 	private SecurityGuard npc;
 	Random random;
 	

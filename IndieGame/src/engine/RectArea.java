@@ -5,12 +5,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class RectArea {
 	// Граничные точки зоны
 	public Point leftL, leftU, rightL, rightU;
 	// Массив соседних зон
 	public ArrayList<RectArea> connected;
+	
+	public ArrayList<Loot> loot;
 
 //	public RectArea(Point[] points) {
 //		if (points.length == 4) {
@@ -27,6 +30,7 @@ public class RectArea {
 		this.rightL = new Point(x2, y2);
 		this.rightU = new Point(x3, y3);
 		this.connected = new ArrayList<RectArea>();
+		this.loot = new ArrayList<Loot>();
 	}
 
 	public RectArea getConnected(int x, int y) {
@@ -34,7 +38,7 @@ public class RectArea {
 			for (int i = 0; i < this.connected.size(); i++) {
 				if (this.connected.get(i).leftL.x < x && this.connected.get(i).rightL.x > x) {
 					if ((this.connected.get(i).leftL.y > y && this.connected.get(i).leftU.y < y)
-							|| (this.connected.get(i).leftL.y < y && this.connected.get(i).leftU.y > y)) {
+							|| (this.connected.get(i).leftL.y < y && this.connected.get(i).leftU.y > y))  {
 						return this.connected.get(i);
 					}
 				}
@@ -42,6 +46,13 @@ public class RectArea {
 		}
 		return this;
 	};
+	
+	public Loot checkLoot(int x, int y) {
+		for (int i = 0; i<loot.size();i++) {
+			if (Math.abs(loot.get(i).position.x-x)<30) return loot.get(i);
+		}
+		return null;
+	}
 
 	public boolean isImpassable(int x, int y) {
 		// Проверяем, пересекает ли данный маршрут зоны
@@ -71,4 +82,5 @@ public class RectArea {
 		g.drawRect(this.leftL.x + additionX, this.leftU.y + additionY, this.width(), this.height());
 		g.setColor(Color.red);
 	}
+	
 }
