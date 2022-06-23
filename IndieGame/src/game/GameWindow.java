@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JComponent;
 
-import maps.HotlineMiamiMap;
 import npc.SecurityGuardThread;
 import player.Player;
 import player.PlayerThread;
+import maps.Map;
+import maps.MapBuilder;
+import maps.HotlineMiamiMapBuilder;
 
 public class GameWindow extends JComponent{
 		private static GameWindow instance;
@@ -20,7 +22,7 @@ public class GameWindow extends JComponent{
 	    private static final int DEF_HEIGHT = 720;
 				
 	    // TODO: any map not only this one
-	    private HotlineMiamiMap map;
+	    private static Map map;
 	    private ArrayList<SecurityGuardThread> npcThreads;
 
         public Dimension getPreferredSize() {
@@ -28,7 +30,7 @@ public class GameWindow extends JComponent{
 	    }
 		
 	    // TODO: change to constuct from any map
-		private GameWindow(HotlineMiamiMap map){	
+		private GameWindow(Map map){	
 			this.map = map;
 			this.npcThreads = new ArrayList<SecurityGuardThread>();
 			for(int i = 0; i < this.map.npc.size(); i++) {
@@ -40,9 +42,9 @@ public class GameWindow extends JComponent{
 			}
 		}
 		
-		public static GameWindow getInstance() {
+		public static GameWindow getInstance(MapBuilder builder) {
 			if(instance == null) {
-				instance = new GameWindow(HotlineMiamiMap.getInstance());
+				instance = new GameWindow(builder.build());
 			}
 			return instance;
 		}
@@ -66,5 +68,9 @@ public class GameWindow extends JComponent{
 				this.npcThreads.get(i).isRunning = false;
 			}
 //			PlayerThread.getInstance().interrupt();
+		}
+		
+		public static Map getCurrentMap() {
+			return map;
 		}
 }

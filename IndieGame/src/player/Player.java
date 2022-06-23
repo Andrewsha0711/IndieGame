@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import engine.Direction;
 import engine.Loot;
 import engine.MovingObject;
-import maps.HotlineMiamiMap;
+import game.GameWindow;
 import player.skins.DefaultPlayerSkin;
 
 // TODO: singleton
@@ -23,7 +23,7 @@ public class Player extends MovingObject{
 		// TODO: hardcode
 		super(defaultX, defaultY, 53 ,53);
 		skin = new DefaultPlayerSkin();
-		this.setArea(HotlineMiamiMap.getDefaultArea());
+		this.setArea(GameWindow.getCurrentMap().getArea().get(0));
 	}
 	
 	public static Player getInstance() {
@@ -45,7 +45,7 @@ public class Player extends MovingObject{
 		Loot loot = this.getArea().checkLoot(this.getX(), this.getY());
 		if (loot!=null)
 		{
-			HotlineMiamiMap.getInstance().getLoot().remove(loot);
+			GameWindow.getCurrentMap().getLoot().remove(loot);
 			this.getArea().loot.remove(loot);
 			lootCount++;
 		}

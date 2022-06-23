@@ -1,6 +1,7 @@
 package player;
 
 import game.GameWindow;
+import main.Frame;
 
 public class PlayerThread extends Thread {
 	private static PlayerThread instance;
@@ -19,7 +20,7 @@ public class PlayerThread extends Thread {
 		while (isRunning) {
 			try {
 				Player.getInstance().move();
-				GameWindow.getInstance().repaint();
+				GameWindow.getInstance(Frame.getCurrentBuilder()).repaint();
 				Thread.currentThread().sleep(15);
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
