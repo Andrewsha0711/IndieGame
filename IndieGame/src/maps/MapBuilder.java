@@ -9,7 +9,7 @@ import npc.SecurityGuard;
 public interface MapBuilder {
 
 	public ArrayList<RectArea> createArea();
-	public ArrayList<SecurityGuard> createNpc();
+	public ArrayList<SecurityGuard> createNpc(int npcCount);
 	public ArrayList<Loot> createLoot(int lootCount);
 	public Map build();
 }

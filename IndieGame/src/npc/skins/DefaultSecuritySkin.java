@@ -17,8 +17,8 @@ public class DefaultSecuritySkin {
 	private static Image[] walkingLeft = new Image[4];
 	private static Image[] walkingRight = new Image[4];
 	
-	private static int k = 20, i = k;
-	private static boolean isWalkingLeftLeg = true;
+	private int k = 20, i = k;
+	private boolean isWalkingLeftLeg = true;
 	
 	private static int standingFlag = 3;
 	
@@ -63,7 +63,7 @@ public class DefaultSecuritySkin {
 		return standing[standingFlag];
 	}
 	
-	public static Image walking(Direction direction) {
+	public Image walking(Direction direction) {
 		int j = -1;
 		if(direction.left) { j = 0; }
 		if(direction.right) { j = 1; }

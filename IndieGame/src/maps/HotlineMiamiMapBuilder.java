@@ -147,13 +147,21 @@ public class HotlineMiamiMapBuilder implements MapBuilder{
 		tmp22.connected.add(tmp23);
 		area.add(tmp23);
 		
-		return this.area;
+		return area;
 	}
 
 	@Override
-	public ArrayList<SecurityGuard> createNpc() {
-		npc.add(new SecurityGuard(140, 30, area.get(0)));
-		return this.npc;
+	public ArrayList<SecurityGuard> createNpc(int npcCount) {
+		for (int i=0; i<npcCount; i++)
+		{
+			RectArea tmpArea = area.get((int)(Math.random() * (area.size())));
+			SecurityGuard tmpGuard = new SecurityGuard((int)(Math.random() * (tmpArea.rightL.x-tmpArea.leftL.x+1)+tmpArea.leftL.x),
+					(int)(Math.random() * (tmpArea.rightL.y-tmpArea.rightU.y+1)+tmpArea.rightU.y), tmpArea);
+			//tmpArea.loot.add(tmpLoot);
+			npc.add(tmpGuard);
+		}
+		
+		return npc;
 	}
 
 	@Override
@@ -166,12 +174,12 @@ public class HotlineMiamiMapBuilder implements MapBuilder{
 			tmpArea.loot.add(tmpLoot);
 			loot.add(tmpLoot);
 		}
-		return this.loot;
+		return loot;
 	}
 
 	@Override
 	public Map build() {
-		return new Map(createArea(), createLoot(10), createNpc(), "IndieGame/resources/maps/hotline_miami_map.PNG");
+		return new Map(createArea(), createLoot(20), createNpc(10), "IndieGame/resources/maps/hotline_miami_map.PNG");
 	}
 
 }

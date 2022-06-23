@@ -49,7 +49,7 @@ public class RectArea {
 	
 	public Loot checkLoot(int x, int y) {
 		for (int i = 0; i<loot.size();i++) {
-			if (Math.abs(loot.get(i).position.x-x)<30) return loot.get(i);
+			if (Math.abs(loot.get(i).position.x-x)<40 && Math.abs(loot.get(i).position.y-y)<40) return loot.get(i);
 		}
 		return null;
 	}
