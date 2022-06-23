@@ -31,31 +31,31 @@ public class DefaultPlayerSkin extends JComponent{
 	public DefaultPlayerSkin(){
 		BufferedImage buffimage;
 		try {
-			buffimage = ImageIO.read(new File("resources/skins/default/standing_l.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/standing_l.png"));
 			standing[0] = buffimage.getScaledInstance(31, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("resources/skins/default/standing_r.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/standing_r.png"));
 			standing[1] = buffimage.getScaledInstance(31, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("resources/skins/default/standing_d.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/standing_d.png"));
 			standing[2] = buffimage.getScaledInstance(53, 31, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("resources/skins/default/standing_u.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/standing_u.png"));
 			standing[3] = buffimage.getScaledInstance(53, 31, Image.SCALE_DEFAULT);
 			
-			buffimage = ImageIO.read(new File("resources/skins/default/walking_left_l.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_left_l.png"));
 			walkingLeft[0] = buffimage.getScaledInstance(53, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("resources/skins/default/walking_left_r.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_left_r.png"));
 			walkingLeft[1] = buffimage.getScaledInstance(53, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("resources/skins/default/walking_left_d.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_left_d.png"));
 			walkingLeft[2] = buffimage.getScaledInstance(53, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("resources/skins/default/walking_left_u.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_left_u.png"));
 			walkingLeft[3] = buffimage.getScaledInstance(53, 53, Image.SCALE_DEFAULT);
 			
-			buffimage = ImageIO.read(new File("resources/skins/default/walking_right_l.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_right_l.png"));
 			walkingRight[0] = buffimage.getScaledInstance(50, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("resources/skins/default/walking_right_r.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_right_r.png"));
 			walkingRight[1] = buffimage.getScaledInstance(50, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("resources/skins/default/walking_right_d.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_right_d.png"));
 			walkingRight[2] = buffimage.getScaledInstance(53, 50, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("resources/skins/default/walking_right_u.png"));
+			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_right_u.png"));
 			walkingRight[3] = buffimage.getScaledInstance(53, 50, Image.SCALE_DEFAULT);
 		} catch (IOException e) {
 			standing = null;

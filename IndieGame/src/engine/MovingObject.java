@@ -7,6 +7,7 @@ public class MovingObject {
 	private int x;
 	private int y;
 	public Direction direction;
+	private boolean isWalking;
 	
 	//Размер модельки
 	private int width;
@@ -23,6 +24,10 @@ public class MovingObject {
 	
 	public void setArea(RectArea area) {
 		this.area = area;
+	}
+	
+	public RectArea getArea() {
+		return this.area;
 	}
 	
 	public int getX() {
@@ -55,12 +60,12 @@ public class MovingObject {
 	}
 	
 	public void checkArea() {
-		if(!(this.x > this.area.leftL.x && this.x < this.area.rightL.x)) {
+		if(!(this.x > this.area.leftL.x && this.x+this.thickness < this.area.rightL.x)) {
 			this.area = this.area.getConnected(this.x, this.y);
 		}
 	}
 	
-	public void move(int distance) {
+	public boolean move(int distance) {
 		this.checkArea();
 		if(this.direction.left) {
 			if(distance > 0) {
@@ -69,39 +74,41 @@ public class MovingObject {
 			}
 			if(distance < 0) {
 				if(this.area.isImpassable(this.x + this.thickness + distance, this.y))
-				this.x += distance;
+					this.x += distance;
 			}
 		}
 		if(this.direction.right) {
 			if(distance > 0) {
 				if(this.area.isImpassable(this.x + this.thickness + distance, this.y))
-				this.x += distance;
+					this.x += distance;
 			}
 			if(distance < 0) {
 				if(this.area.isImpassable(this.x - distance, this.y))
-				this.x -= distance;
+					this.x -= distance;
 			}
 		}
 		if(this.direction.up) {
 			if(distance > 0) {
 				if(this.area.isImpassable(this.x, this.y - distance))
-				this.y -= distance;
+					this.y -= distance;
 			}
 			if(distance < 0) {
 				if(this.area.isImpassable(this.x, this.y + this.thickness + distance))
-				this.y += distance;
+					this.y += distance;
 			}
 		}
 		if(this.direction.down) {
 			if(distance > 0) {
 				if(this.area.isImpassable(this.x, this.y + this.thickness + distance))
-				this.y += distance;
+					this.y += distance; 
 			}
 			if(distance < 0) {
 				if(this.area.isImpassable(this.x, this.y - distance))
-				this.y -= distance;
+					this.y -= distance;
 			}
 		}
+		
+		return this.isWalking;
 	}
 	
 	

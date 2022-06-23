@@ -7,12 +7,16 @@ import engine.Direction;
 import engine.MovingObject;
 import maps.HotlineMiamiMap;
 import npc.skins.DefaultSecuritySkin;
+import player.Player;
+import npc.SecurityGuardThread;
+import java.lang.Math;
 
 public class SecurityGuard extends MovingObject{
 
 	private DefaultSecuritySkin skin;
 	// Дефолтные координаты
 	private int defaultStep = 2;
+	private int visibility = 150;
 	
 	public SecurityGuard(int x, int y) {
 		// TODO: hardcode
@@ -31,7 +35,18 @@ public class SecurityGuard extends MovingObject{
 //		super.move(defaultStep);
 //	}
 	
+	//checking if player is nearby and in the same room
+	public boolean checkPlayer()
+	{
+		if (Math.abs(this.getX()-Player.getInstance().getX())<visibility&& Math.abs(this.getY()-Player.getInstance().getY())<visibility
+				&& this.getArea()==Player.getInstance().getArea()) 
+			return true;
+		return false;
+	}
+	
 	public void move() {
+		// TODO: stop guard's thread ?
+		if (!checkPlayer())
 		super.move(defaultStep);
 	}
 }
