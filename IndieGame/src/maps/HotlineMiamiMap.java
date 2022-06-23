@@ -23,14 +23,11 @@ public class HotlineMiamiMap extends JComponent{
     private static final int DEF_WIDTH = 701*2;
     private static final int DEF_HEIGHT = 641*2;
 	// Textures and other
-	private static final String backgroundSrc = "IndieGame/resources/maps/hotline_miami_map.PNG";
+	private static final String backgroundSrc = "resources/maps/hotline_miami_map.PNG";
 	private static ArrayList<RectArea> area;
 	private static ArrayList<Loot> loot;
 	public static ArrayList<SecurityGuard> npc;
-	
-//	static {
-//		area.add(new RectArea(0,100, 0,0, 100,100, 100,0));
-//	}
+
 	
 	private Image background;
 	
@@ -50,7 +47,7 @@ public class HotlineMiamiMap extends JComponent{
 		loot = new ArrayList<Loot>();
 		
 		RectArea tmp = new RectArea(-30,360, -30,-20, 200,360, 200,-20);
-		RectArea tmp1 = new RectArea(130,120, 130,90, 290,120, 290, 90);
+		RectArea tmp1 = new RectArea(130,180, 130,90, 290,180, 290, 90);
 		tmp.connected.add(tmp1);
 		tmp1.connected.add(tmp);
 				
@@ -186,7 +183,7 @@ public class HotlineMiamiMap extends JComponent{
 
 		
 		
-		npc.add(new SecurityGuard(140, 30));
+		//npc.add(new SecurityGuard(140, 30));
 	}
 	
 
@@ -201,9 +198,17 @@ public class HotlineMiamiMap extends JComponent{
 		}
 	}
 	
-	public static RectArea getDefaultArea() {
+	public static RectArea getDefaultArea(int x, int y) {
 		// TODO: hardcode
-		return area.get(0);
+		for(int i = 0; i<instance.area.size(); i++) {
+			if(area.get(i).leftL.x < x && 
+					area.get(i).rightL.x > x &&
+					area.get(i).leftU.y < y &&
+					area.get(i).leftL.y > y) {
+				return area.get(i);
+			}
+		}
+		return area.get(2);
 	}
 	
 	public static ArrayList<Loot> getLoot() {

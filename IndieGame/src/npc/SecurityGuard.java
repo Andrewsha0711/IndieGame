@@ -20,14 +20,16 @@ public class SecurityGuard extends MovingObject{
 	
 	public SecurityGuard(int x, int y) {
 		// TODO: hardcode
-		super(x, y, 53 ,53);
+		super(x, y);
 		skin = new DefaultSecuritySkin();
-		this.setArea(HotlineMiamiMap.getDefaultArea());
+		this.setArea(HotlineMiamiMap.getDefaultArea(this.getX(), this.getY()));
 	}
 	
 	public void paint(Graphics g, int additionX, int additionY) {
 		g = (Graphics2D) g;
 		skin.paint(g, this.direction, this.getX() + additionX, this.getY() + additionY);
+		this.thickness = 53;
+		this.thickness = 53;
 	}
 	
 //	public void move(Direction direction) {

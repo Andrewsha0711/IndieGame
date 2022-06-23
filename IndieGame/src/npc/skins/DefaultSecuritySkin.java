@@ -22,34 +22,37 @@ public class DefaultSecuritySkin {
 	
 	private static int standingFlag = 3;
 	
+	private static int thickness = 0;
+	private static int width = 0;
+	
 	public DefaultSecuritySkin(){
 		BufferedImage buffimage;
 		try {
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/standing_guard_l.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/standing_guard_l.png"));
 			standing[0] = buffimage.getScaledInstance(31, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/standing_guard_r.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/standing_guard_r.png"));
 			standing[1] = buffimage.getScaledInstance(31, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/standing_guard_d.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/standing_guard_d.png"));
 			standing[2] = buffimage.getScaledInstance(53, 31, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/standing_guard_u.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/standing_guard_u.png"));
 			standing[3] = buffimage.getScaledInstance(53, 31, Image.SCALE_DEFAULT);
 			
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_guard_left_l.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/walking_guard_left_l.png"));
 			walkingLeft[0] = buffimage.getScaledInstance(53, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_guard_left_r.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/walking_guard_left_r.png"));
 			walkingLeft[1] = buffimage.getScaledInstance(53, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_guard_left_d.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/walking_guard_left_d.png"));
 			walkingLeft[2] = buffimage.getScaledInstance(53, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_guard_left_u.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/walking_guard_left_u.png"));
 			walkingLeft[3] = buffimage.getScaledInstance(53, 53, Image.SCALE_DEFAULT);
 			
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_guard_right_l.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/walking_guard_right_l.png"));
 			walkingRight[0] = buffimage.getScaledInstance(50, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_guard_right_r.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/walking_guard_right_r.png"));
 			walkingRight[1] = buffimage.getScaledInstance(50, 53, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_guard_right_d.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/walking_guard_right_d.png"));
 			walkingRight[2] = buffimage.getScaledInstance(53, 50, Image.SCALE_DEFAULT);
-			buffimage = ImageIO.read(new File("IndieGame/resources/skins/default/walking_guard_right_u.png"));
+			buffimage = ImageIO.read(new File("resources/skins/default/walking_guard_right_u.png"));
 			walkingRight[3] = buffimage.getScaledInstance(53, 50, Image.SCALE_DEFAULT);
 		} catch (IOException e) {
 			standing = null;
@@ -60,10 +63,14 @@ public class DefaultSecuritySkin {
 	}
 	
 	public Image standing() {
+	    thickness = 31;
+	    width = 53;
 		return standing[standingFlag];
 	}
 	
 	public static Image walking(Direction direction) {
+	    thickness = 53;
+	    width = 53;
 		int j = -1;
 		if(direction.left) { j = 0; }
 		if(direction.right) { j = 1; }
@@ -93,6 +100,13 @@ public class DefaultSecuritySkin {
 				return walkingLeft[j];
 			}
 		}
+	}
+	
+	public int getCurrentThickness() {
+		return thickness;
+	}
+	public int getCurrentWidth() {
+		return width;
 	}
 	
 	public void paint(Graphics g, Direction direction, int x, int y) {
