@@ -79,8 +79,6 @@ public class HotlineMiamiMap extends JComponent{
 		tmp5.connected.add(tmp4);
 		tmp3.connected.add(tmp5);
 		tmp5.connected.add(tmp3);
-		//tmp2.connected.add(tmp5);
-		//tmp5.connected.add(tmp2);
 		area.add(tmp5);
 		
 		RectArea tmp6 = new RectArea(420, 280, 420, 240, 620, 280, 620, 240);
@@ -90,8 +88,7 @@ public class HotlineMiamiMap extends JComponent{
 		tmp5.connected.add(tmp6);
 		area.add(tmp6);
 		
-
-		
+	
 		RectArea tmp8 = new RectArea(340, 450, 340, 300, 460, 450, 460, 300);
 		tmp8.connected.add(tmp2);
 		tmp2.connected.add(tmp8);
@@ -104,9 +101,6 @@ public class HotlineMiamiMap extends JComponent{
 		tmp7.connected.add(tmp2);
 		area.add(tmp7);
 		
-		//Loot loot3=new Loot(tmp7.leftL.x+20,tmp7.leftL.y-20);
-		//tmp7.loot.add(loot3);
-		//loot.add(loot3);
 		
 		RectArea tmp9 = new RectArea(460, 680, 460, 480, 580, 680, 580, 480);
 		tmp9.connected.add(tmp7);
@@ -152,12 +146,6 @@ public class HotlineMiamiMap extends JComponent{
 		tmp16.connected.add(tmp15);
 		tmp15.connected.add(tmp16);
 		area.add(tmp16);
-		//Loot loot4=new Loot(tmp16.leftU.x+60,tmp16.leftU.y+20);
-		//tmp16.loot.add(loot4);
-		//loot.add(loot4);
-		//Loot loot5=new Loot(tmp16.rightU.x-150,tmp16.rightU.y+200);
-		//tmp16.loot.add(loot5);
-		//loot.add(loot5);
 		
 		RectArea tmp17 = new RectArea(-120, -220, -120, -280, 20, -220, 20, -280);
 		tmp10.connected.add(tmp17);
